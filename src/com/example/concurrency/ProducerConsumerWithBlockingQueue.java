@@ -45,7 +45,7 @@ public class ProducerConsumerWithBlockingQueue {
         return processed;
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         try {
             // 1. Create a test input list of words
             List<String> inputWords = Arrays.asList(
