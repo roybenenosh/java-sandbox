@@ -3,11 +3,11 @@ package com.example.concurrency;
 import java.util.*;
 import java.util.concurrent.*;
 
-public class ExecutorServiceExample {
+public class NTasksSimpleExecutor {
 
     private final ExecutorService pool;          // injected: shared, configurable, testable
 
-    ExecutorServiceExample(ExecutorService pool) {
+    NTasksSimpleExecutor(ExecutorService pool) {
         this.pool = pool;
     }
 
@@ -36,5 +36,22 @@ public class ExecutorServiceExample {
         }
         return result;
     }
-}
 
+    static void main(String[] args) throws InterruptedException {
+        ExecutorService pool = Executors.newFixedThreadPool(4);
+
+        try {
+            NTasksSimpleExecutor example = new NTasksSimpleExecutor(pool);
+            List<String> productIds = Arrays.asList("apple", "banana", "bad", "orange");
+            Map<String, Integer> prices = example.fetchAll(productIds, 1000);
+
+            prices.forEach((id, price) -> {
+                System.out.println("Product: " + id + " -> Price/Status: " + price);
+            });
+
+        } finally {
+            pool.shutdown();
+            pool.awaitTermination(2, TimeUnit.SECONDS);
+        }
+    }
+}
