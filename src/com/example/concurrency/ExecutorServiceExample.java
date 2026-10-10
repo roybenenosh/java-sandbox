@@ -1,9 +1,6 @@
-package java.threads;
+package com.example.concurrency;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class ExecutorServiceExample {
@@ -40,3 +37,4 @@ public class ExecutorServiceExample {
         return result;
     }
 }
+
